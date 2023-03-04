@@ -1,0 +1,26 @@
+--
+-- SQLiteStudio v3.4.1 生成的文件，周六 3月 4 20:51:44 2023
+--
+-- 所用的文本编码：System
+--
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
+-- 表：docs
+DROP TABLE IF EXISTS docs;
+
+CREATE TABLE IF NOT EXISTS docs (
+    md TEXT
+);
+
+INSERT INTO docs (
+                     md
+                 )
+                 VALUES (
+                     'helloworld'
+                 );
+
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;
+
