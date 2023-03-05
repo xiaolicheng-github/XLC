@@ -1,8 +1,8 @@
-import React from 'react'
-import './App.css'
+import React from 'react';
+import './App.scss';
 
 function App() {
-  return <h2>Hello East_White</h2>
+  return <div>asdfasd</div>;
 }
 
-export default App
+export default App;
