@@ -1,4 +1,5 @@
-const isDEV = process.env.NODE_ENV === 'development'
+// const isDEV = process.env.NODE_ENV === 'development'
+const isReact = process.env.PROJECT_TYPE === 'react';
 module.exports = {
   // 执行顺序由右往左,所以先处理ts,再处理jsx,最后再试一下babel转换为低版本语法
   "presets": [
@@ -14,11 +15,11 @@ module.exports = {
         "corejs": 3 // 配置使用core-js使用的版本
       }
     ],
-    "@babel/preset-react",
+    isReact ? "@babel/preset-react" : "@vue/cli-plugin-babel/preset",
     "@babel/preset-typescript"
   ],
   plugins: [
-    isDEV && require.resolve('react-refresh/babel'), // 如果是开发模式,就启动react热更新插件
+    // isDEV && require.resolve('react-refresh/babel'), // 如果是开发模式,就启动react热更新插件
     ["@babel/plugin-proposal-decorators", { "legacy": true }] // 支持装饰器
   ].filter(Boolean) // 过滤空值
 }

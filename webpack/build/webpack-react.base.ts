@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isDev = process.env.NODE_ENV === 'development'; // 是否是开发模式
-const styleLoaderConfig = () => isDev ? 'style-loader' : MiniCssExtractPlugin.loader;
+const isProd = process.env.NODE_ENV === 'prod'; // 是否是开发模式
+const styleLoaderConfig = () => isProd ? MiniCssExtractPlugin.loader : 'style-loader';
 
 console.log('NODE_ENV', process.env.NODE_ENV)
 console.log('BASE_ENV', process.env.BASE_ENV)
