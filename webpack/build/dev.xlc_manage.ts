@@ -24,7 +24,7 @@ const devConfig = merge(baseConfig({
     modules: [path.resolve(__dirname, '../xlc_manage/src'), 'node_modules']
   },
   plugins: {
-    template: '../xlc_manage/index.html'
+    template: '../xlc_manage/public/index.html'
   }
 }), {
   mode: 'development', // 开发模式,打包更加快速,省了代码优化步骤

@@ -23,7 +23,7 @@ const devConfig = merge(baseConfig({
     modules: [path.resolve(__dirname, '../xlc_blog/src'), 'node_modules']
   },
   plugins: {
-    template: '../xlc_blog/index.html'
+    template: '../xlc_blog/public/index.html'
   }
 }), {
   mode: 'development', // 开发模式,打包更加快速,省了代码优化步骤

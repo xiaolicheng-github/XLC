@@ -26,7 +26,7 @@ const webpackConfig = (options: any) => ({
       {
         include: [path.resolve(__dirname, options?.module?.rules?.include || '../src')], // 只对项目src文件的ts,tsx进行loader解析
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
-        use: ['thread-loader', 'babel-loader'] // 此配置移至babel.config.js
+        use: ['babel-loader', 'thread-loader'] // 此配置移至babel.config.js
       },
       {
         test: /\.css$/, //匹配所有 css文件

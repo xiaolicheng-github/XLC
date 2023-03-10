@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev:manage": "cross-env NODE_ENV=dev_xlc_manage PROJECT_TYPE=react webpack-dev-server -c build/dev.xlc_manage.ts",
-    "dev:blog": "cross-env NODE_ENV=dev_xlc_blog webpack-dev-server -c build/dev.xlc_blog.ts"
+    "dev:blog": "cross-env NODE_ENV=dev_xlc_blog webpack-dev-server -c build/dev.xlc_blog.ts",
+    "build:blog": "cross-env NODE_ENV=prod webpack -c build/prod.xlc_blog.ts",
+    "build:manage": "cross-env NODE_ENV=prod PROJECT_TYPE=react webpack -c build/prod.xlc_manage.ts"
   },
   "keywords": [],
   "author": "",
@@ -60,6 +62,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   }
 }
