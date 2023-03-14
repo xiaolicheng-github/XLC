@@ -9,10 +9,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const globAll = require('glob-all');
 const distPath = './dist/manage';
+const staticPath = '../manage/static';
 const prodConfig = merge(baseConfig({
   entry: '../xlc_manage/src/index.tsx',
   output: {
-    filename: 'static/js/[name].[chunkhash:8].js',
+    filename: `${staticPath}/js/[name].[chunkhash:8].js`,
     path: distPath
   },
   module: {
@@ -20,7 +21,7 @@ const prodConfig = merge(baseConfig({
       include: '../xlc_manage/src'
     },
     generator: {
-      filename: 'static/images/[name].[contenthash:8][ext]'
+      filename: `${staticPath}/images/[name].[contenthash:8][ext]`
     }
   },
   resolve: {
@@ -49,7 +50,7 @@ const prodConfig = merge(baseConfig({
     }),
     // 抽离css插件
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[contenthash:8].css' // 抽离css的输出目录和名称
+      filename: `${staticPath}/css/[name].[contenthash:8].css` // 抽离css的输出目录和名称
     }),
     // 清理无用css
     new PurgeCSSPlugin({
