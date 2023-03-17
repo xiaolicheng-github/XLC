@@ -1,25 +1,59 @@
 @import './static/icon/iconfont.css';
 @import './static/style/common.scss';
-
-.root-header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  transition: all .2s;
-  height: 60px;
-  background: #fff;
-  border-bottom: 1px solid #f1f1f1;
-  z-index: 250;
-  display: flex;
-  align-items: center;
-  .icon-logo {
-    font-size: 24px;
-    margin-left: 60px;
+.root-app {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: auto;
+  .root-header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .2s;
+    height: 60px;
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .icon-logo {
+      font-size: 24px;
+      margin-left: 60px;
+    }
+    .logo-text {
+      font-size: 24px;
+      font-weight: bold;
+      margin-left: 10px;
+      margin-right: 25px;
+    }
+    .route-name {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: 14px;
+      cursor: pointer;
+      height: 100%;
+      padding: 0 25px;
+      position: relative;
+      &:hover {
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 100%;
+          bottom: 1px;
+          height: 2px;
+          background: #1e80ff;
+        }
+      }
+      &.active {
+        color: #1e80ff;
+      }
+    }
   }
-  .logo-text {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 10px;
-  }
+  
 }
