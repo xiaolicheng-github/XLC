@@ -12,6 +12,7 @@ specifiers:
   '@types/react-dom': ^18.0.9
   '@vue/cli-plugin-babel': ^5.0.8
   '@vue/compiler-sfc': ^3.2.47
+  '@vue/tsconfig': ^0.1.3
   antd: ^5.3.1
   autoprefixer: ^10.4.13
   axios: ^1.2.2
@@ -73,6 +74,7 @@ devDependencies:
   '@types/react-dom': 18.0.11
   '@vue/cli-plugin-babel': 5.0.8_k6mmb3ae2xj3d5risptzmnq2he
   '@vue/compiler-sfc': 3.2.47
+  '@vue/tsconfig': 0.1.3_@types+node@18.14.6
   autoprefixer: 10.4.13
   babel-loader: 9.1.2_qoaxtqicpzj5p3ubthw53xafqm
   compression-webpack-plugin: 10.0.0_webpack@5.75.0
@@ -2227,6 +2229,17 @@ packages:
 
   /@vue/shared/3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+
+  /@vue/tsconfig/0.1.3_@types+node@18.14.6:
+    resolution: {integrity: sha512-kQVsh8yyWPvHpb8gIc9l/HIDiiVUy1amynLNpCy8p+FoCiZXCo6fQos5/097MmnNZc9AtseDsCrfkhqCrJ8Olg==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+    dependencies:
+      '@types/node': 18.14.6
+    dev: true
 
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}

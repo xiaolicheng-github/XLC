@@ -1,5 +1,5 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
+import path from 'path';
+import { merge } from 'webpack-merge';
 import baseConfig from './webpack-vue.base';
 
 const devConfig = merge(baseConfig({

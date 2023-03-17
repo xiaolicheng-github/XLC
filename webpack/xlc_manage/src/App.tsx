@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 
 function App() {
-  return <div>{'asdas'}</div>;
+  return <div className='app'>{'asdas'}</div>;
 }
 
 export default App;
