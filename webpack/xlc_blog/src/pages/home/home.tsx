@@ -5,7 +5,7 @@ export default defineComponent({
   name: 'App',
   setup() {
     return () => (
-      <div class="home-page">vue3</div>
+      <div class="home-page">home</div>
     )
   }
 })

@@ -1,0 +1,25 @@
+@import './static/icon/iconfont.css';
+@import './static/style/common.scss';
+
+.root-header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: all .2s;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  .icon-logo {
+    font-size: 24px;
+    margin-left: 60px;
+  }
+  .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+}
