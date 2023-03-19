@@ -1,0 +1,38 @@
+.study-page-component {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  .study-content {
+    display: flex;
+    align-items: flex-start;
+    .left-nav {
+      min-width: 180px;
+      background: #fff;
+      position: sticky;
+      top: 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      .left-nav-item {
+        height: 45px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        padding: 0 16px;
+        cursor: pointer;
+        &:hover {
+          color: #1e80ff;
+          background-color: #f7f8fa;
+        }
+      }
+    }
+    .center-content {
+      width: 720px;
+    }
+    .right-adv {
+      width: 250px;
+    }
+  }
+}
