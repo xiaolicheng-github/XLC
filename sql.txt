@@ -1,26 +1,57 @@
---
--- SQLiteStudio v3.4.1 生成的文件，周六 3月 4 20:51:44 2023
---
--- 所用的文本编码：System
---
-PRAGMA foreign_keys = off;
-BEGIN TRANSACTION;
-
--- 表：docs
-DROP TABLE IF EXISTS docs;
-
-CREATE TABLE IF NOT EXISTS docs (
-    md TEXT
+-- 创建数据库
+sqlite3 xlcDB.db
+.databases
+-- 打开数据库
+.open xlcDB.db
+-- 退出
+.quit
+-- 生成sql
+sqlite3 xlcDB.db .dump > xlcDB.sql
+-- 反向
+sqlite3 xlcDB.db < xlcDB.sql
+-- 创建表 ( 基本数据类型： NULL-空  INTEGER-整数 REAL-浮点数 TEXT-文本 BLOB-blob数据 )
+CREATE TABLE STUDY_DATA(
+id INT PRIMARY KEY NOT NULL,
+name TEXT NOT NULL,
+content TEXT NOT NULL
 );
-
-INSERT INTO docs (
-                     md
-                 )
-                 VALUES (
-                     'helloworld'
-                 );
-
-
-COMMIT TRANSACTION;
-PRAGMA foreign_keys = on;
+-- 检查是否创建成功
+.tables
+-- 获取表的完整信息
+.schema  STUDY_DATA
+-- 删除表
+DROP TABLE STUDY_DATA;
+-- 添加数据
+INSERT INTO STUDY_DATA (id, name, content)
+VALUES (1, 'test1', 'sdfasdfasdfasdf');
+-- 查询数据
+SELECT * FROM STUDY_DATA;
+-- 条件查询
+SELECT * FROM STUDY_DATA WHERE age >= 25 AND salary>= 65000;
+...WHERE age >=  25 OR salary >= 65000;
+...WHERE age IS NOT NULL;  --age不为空
+...WHERE name LIKE 'Ki%';  --以Ki为开头的字符
+...WHERE age IN ( 25, 27 ); -- age字段包含 25、27 的记录
+...WHERE age NOT IN ( 25, 27 ); -- age字段不包含 25、27的记录
+...WHERE age BETWEEN 25 AND 27; -- age字段处于25 27 之间的记录
+-- 修改数据
+UPDATE STUDY_DATA SET name = 'xxxx' WHERE id = 6; --更新id为6的name为xxxx
+UPDATE STUDY_DATA SET name = 'Texas', age = 18; -- 修改多个字段
+-- 删除数据
+DELETE FROM STUDY_DATA WHERE id = 7; -- 删除id为7的记录
+DELETE FROM STUDY_DATA; -- 删除表中所有记录
+-- 分页查询
+SELECT * FROM STUDY_DATA LIMIT 3 OFFSET 2; -- 从第(2+1)位开始查询3条记录
+-- 升序降序
+SELECT * FROM STUDY_DATA ORDER BY age ASC salary DESC; -- ASC升序 DESC降序
+SELECT * FROM STUDY_DATA ORDER BY name, salary ASC; -- 多个字段升序
+-- 分组查询 （GROUP BY 子句必须放在 WHERE 子句中的条件之后，必须放在 ORDER BY 子句之前）
+SELECT name, SUM(salary) FROM STUDY_DATA GROUP BY name; -- 查询每个name的salary总和
+-- 分组查询过滤
+SELECT * FROM STUDY_DATA GROUP BY name HAVING count(name) < 2; --查询小于name相同记录小于2的分组记录
+-- 内连接INNER JOIN --合并两张表的查询 并且关系
+SELECT id, name, dept FROM STUDY_DATA INNER JOIN STUDY_DATA1 ON STUDY_DATA.id = STUDY_DATA1.id;
+SELECT ... FROM table1 JOIN table2 USING ( column1 ,... ) ... -- 可使用自定义字段命名避免冗余
+-- 外连接OUTER JOIN (sqlite3只支持左外连接LEFT OUTER JOIN)  查询左表记录附加符合条件的右表记录
+SELECT id, name, dept FROM STUDY_DATA LEFT OUTER JOIN STUDY_DATA1 ON STUDY_DATA.id = STUDY_DATA1.id;
 
