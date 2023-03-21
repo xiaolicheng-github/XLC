@@ -1,7 +1,8 @@
 import { defineComponent, ref, render} from 'vue'
 import { RouterView } from 'vue-router';
 import { routes } from './router/index';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router';
+import { Popover } from 'ant-design-vue';
 import './App.scss';
 
 export default defineComponent({
@@ -11,6 +12,8 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
     const routePath = ref(route.path);
+
+    const userPopVisible = ref(false);
 
     function handleClickRoute(item: { name: string, path: string}) {
       console.log(item)
@@ -34,6 +37,23 @@ export default defineComponent({
               {item.displayName}
             </span>
           ))}
+          <Popover
+            v-model={[userPopVisible.value, 'visible']}
+            trigger="click"
+            placement={'bottom'}
+            v-slots={{
+              content: () => (
+                <div>
+                  <div>登录</div>
+                  <div>退出登录</div>
+                </div>
+              )
+            }}>
+            <div class="user-info">
+              <div class="user-img"></div>
+              <span class="user-name">xxx</span>
+            </div>
+          </Popover>
        </div>
        <div class="root-content-container">
         <RouterView></RouterView>

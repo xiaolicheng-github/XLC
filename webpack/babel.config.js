@@ -19,7 +19,9 @@ module.exports = {
     "@babel/preset-typescript"
   ],
   plugins: [
+    ["import", { "libraryName": "antd", "libraryDirectory": "lib"}, "antd"],
+    ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }],
     // isDEV && require.resolve('react-refresh/babel'), // 如果是开发模式,就启动react热更新插件
-    ["@babel/plugin-proposal-decorators", { "legacy": true }] // 支持装饰器
+    ["@babel/plugin-proposal-decorators", { "legacy": true }], // 支持装饰器
   ].filter(Boolean) // 过滤空值
 }

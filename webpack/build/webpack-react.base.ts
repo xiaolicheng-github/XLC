@@ -30,7 +30,7 @@ const webpackConfig = (options: any) => ({
       },
       {
         test: /\.css$/, //匹配所有 css文件
-        include: [path.resolve(__dirname,  options?.module?.rules?.include || '../src')],
+        include: [path.resolve(__dirname,  '../')],
         use: [
           styleLoaderConfig(),
           'css-loader',

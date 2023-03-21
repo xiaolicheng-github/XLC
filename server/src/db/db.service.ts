@@ -24,7 +24,11 @@ export class DbService {
             reject(err);
             return;
           }
-          resolve(rows);
+          resolve({
+            msg: '请求成功',
+            code: 200,
+            data: rows
+          });
         });
       } else {
         this.db.all(sql, (err, rows) => {
@@ -32,7 +36,11 @@ export class DbService {
             reject(err);
             return;
           }
-          resolve(rows);
+          resolve({
+            msg: '请求成功',
+            code: 200,
+            data: rows
+          });
         });
       }
     });

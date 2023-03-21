@@ -34,7 +34,7 @@ const webpackConfig = (options: any) => ({
       },
       {
         test: /\.css$/, //匹配所有 css文件
-        include: [path.resolve(__dirname,  options?.module?.rules?.include || '../src')],
+        include: [path.resolve(__dirname,  '../')],
         use: [
           styleLoaderConfig(),
           'css-loader',
@@ -102,7 +102,7 @@ const webpackConfig = (options: any) => ({
   resolve: {
     extensions: ['.js', '.tsx', '.ts'], // 提升构建速度
     alias: { // 设置别名，引入文件时可用@表示../src
-      '@': path.join(__dirname, options?.resolve?.alias?.path || '../src')
+      '@': path.join(__dirname, options?.resolve?.alias?.path || '../src'),
     },
     modules: options?.resolve?.modules || [], // 查找第三方模块只在本项目的node_modules中查找
   },
@@ -113,6 +113,8 @@ const webpackConfig = (options: any) => ({
       inject: true, // 自动注入静态资源
     }),
     new webpack.DefinePlugin({
+      '__VUE_OPTIONS_API__': true,
+      '__VUE_PROD_DEVTOOLS__': true,
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV) // 配置环境变量(判断当前环境)
     })
   ],
