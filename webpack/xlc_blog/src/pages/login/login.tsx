@@ -22,9 +22,10 @@ export default defineComponent({
     const regPwd = ref('');
     const regBeginPwd = ref('');
     const regCode = ref('');
-    /*  */
 
-
+    function handleCancel() {
+      userStore.setShowLogin(false);
+    }
     function handleResetCode() {
       code.value = createCodeStr();
     }
@@ -43,6 +44,7 @@ export default defineComponent({
         footer={null}
         width={'100%'}
         wrap-class-name={'full-modal'}
+        onCancel={handleCancel}
         v-slots={{
           default: () => (
             <div class="login-modal-content">
