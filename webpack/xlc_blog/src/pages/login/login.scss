@@ -3,5 +3,30 @@
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  .login-content {
+    width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #005dff5c;
+    border-radius: 20px;
+    box-shadow: 0 18px 32px -18px #000;
+    .login-title {
+      font-size: 18px;
+      margin-left: 6px;
+    }
+    .opreate-wrap {
+      margin-top: 10px;
+    }
+    .login-form-item {
+      margin-top: 10px;
+      &.code-wrap {
+        display: flex;
+        align-items: center;
+        .code-input {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
 }

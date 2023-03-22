@@ -102,8 +102,13 @@ export default defineComponent({
     }
 
     function renderFn() {
-      return <div class="check-code-component" style={{ width: `${props.width}px` }}>
-        <canvas onClick={handleClick} width={props.width} height={props.height} ref={canvasRef}></canvas>
+      return <div class="check-code-component"
+        style={{ width: `${props.width}px`, height:`${props.height}px`  }}>
+        <canvas
+          width={props.width}
+          height={props.height}
+          ref={canvasRef}
+          onClick={handleClick}></canvas>
       </div>
     }
     return {
