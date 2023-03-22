@@ -1,8 +1,10 @@
-import { defineComponent, ref, render} from 'vue'
+import { defineComponent, ref } from 'vue'
 import { RouterView } from 'vue-router';
 import { routes } from './router/index';
 import { useRouter, useRoute } from 'vue-router';
 import { Popover } from 'ant-design-vue';
+import { useUserStore } from './store/user';
+import LoginModal from './pages/login/login';
 import './App.scss';
 
 export default defineComponent({
@@ -15,6 +17,8 @@ export default defineComponent({
 
     const userPopVisible = ref(false);
 
+    const userStore = useUserStore();
+
     function handleClickRoute(item: { name: string, path: string}) {
       console.log(item)
       if(routePath.value === item.path) {
@@ -24,6 +28,13 @@ export default defineComponent({
         name: item.name
       });
       routePath.value = item.path;
+    }
+    function showLogin() {
+      userStore.setShowLogin(true);
+      userPopVisible.value = false;
+    }
+    function loginOut() {
+
     }
     function renderFn() {
       return <div class="root-app">
@@ -43,9 +54,9 @@ export default defineComponent({
             placement={'bottom'}
             v-slots={{
               content: () => (
-                <div>
-                  <div>登录</div>
-                  <div>退出登录</div>
+                <div class="app-component-header-user-pop-list">
+                  <div class="user-pop-list-item" onClick={showLogin}>登录</div>
+                  <div class="user-pop-list-item" onClick={loginOut}>退出登录</div>
                 </div>
               )
             }}>
@@ -58,11 +69,13 @@ export default defineComponent({
        <div class="root-content-container">
         <RouterView></RouterView>
        </div>
+       <LoginModal></LoginModal>
       </div>
     };
     return {
       routePath,
-      renderFn
+      renderFn,
+      userStore
     }
   },
   render() {

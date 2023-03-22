@@ -80,3 +80,15 @@
     position: relative;
   }
 }
+.app-component-header-user-pop-list {
+  padding: 5px 0;
+  .user-pop-list-item {
+    line-height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+    &:hover {
+      cursor: pointer;
+      background-color: #f1f1f1;
+    }
+  }
+}

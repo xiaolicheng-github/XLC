@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 
-export const useStore = defineStore('userStore', {
+export const useUserStore = defineStore('userStore', {
   state: () => ({
     id: '',
-    name: ''
+    name: '',
+    showLogin: false
   }),
   getters: {
     id(state) {
@@ -13,6 +14,9 @@ export const useStore = defineStore('userStore', {
   actions: {
     setId(id: string) {
       this.id = id;
+    },
+    setShowLogin(v: boolean) {
+      this.showLogin = v;
     }
   }
 });

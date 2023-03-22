@@ -24,7 +24,7 @@ const webpackConfig = (options: any) => ({
   module : {
     rules: [
       {
-        include: [path.resolve(__dirname, options?.module?.rules?.include || '../src')], // 只对项目src文件的ts,tsx进行loader解析
+        include: [path.resolve(__dirname, '../')],
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
         use: ['babel-loader', 'thread-loader'] // 此配置移至babel.config.js
       },
