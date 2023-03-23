@@ -22,6 +22,8 @@ export default defineComponent({
     const regPwd = ref('');
     const regBeginPwd = ref('');
     const regCode = ref('');
+    const mailAddr = ref('');
+    const mailAddrCode = ref('');
 
     function handleCancel() {
       userStore.setShowLogin(false);
@@ -72,6 +74,13 @@ export default defineComponent({
                     addon-before={'重新输入密码'}
                   ></Input.Password>
                 </div>
+                <div class="login-form-item">
+                  <Input
+                    v-model={[mailAddr.value, 'value']}
+                    size="large"
+                    addon-before={'邮箱地址'}
+                  ></Input>
+                </div>
                 <div class="login-form-item code-wrap">
                   <Input
                     v-model={[regCode.value, 'value']}
@@ -82,6 +91,14 @@ export default defineComponent({
                   <CheckCode
                     code={code.value}
                     onResetCode={handleResetCode}></CheckCode>
+                  <Button class="ml10">发送邮箱验证码</Button>
+                </div>
+                <div class="login-form-item">
+                  <Input
+                    v-model={[mailAddrCode.value, 'value']}
+                    size="large"
+                    addon-before={'邮箱验证码'}
+                  ></Input>
                 </div>
                 <div class="opreate-wrap">
                 <Button
