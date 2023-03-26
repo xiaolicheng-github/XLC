@@ -1,16 +1,18 @@
 import { ISendMailOptions, MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
+const moment = require('moment');
+import { DbService } from 'src/db/db.service';
+import { randomIntCode } from '../utils/random';
 
 @Injectable()
 export class EmailService {
-  constructor(private readonly mailerService: MailerService) { }
+  constructor(
+    private readonly mailerService: MailerService,
+    private readonly dbService: DbService) { }
 
   async sendEmailCode(data) {
-    console.log(data.email);
     try {
-      const code = Math.random()
-        .toString()
-        .slice(-6);
+      const code = randomIntCode(6);
       const date = new Date().toString();
       const sendMailOptions: ISendMailOptions = {
         to: data.email,
@@ -26,14 +28,17 @@ export class EmailService {
       this.mailerService
         .sendMail(sendMailOptions)
         .then(() => {
-          console.log(`发送邮件给:${data.email},成功!主题:${data.subject || '默认'}`);
+          this.dbService.setEmailCode({
+            email: data.email,
+            code: Number(code),
+            time: moment.now()
+          });
         })
         .catch(error => {
-          console.log(`发送邮件给:${data.email}出错!主题:${data.subject || '默认'}`, error);
+          return { error }
         });
       return { code: 200, message: '发送成功' };
     } catch (error) {
-      console.error('发送邮件出错:', error);
       return { error };
     }
   }

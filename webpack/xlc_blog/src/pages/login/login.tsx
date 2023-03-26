@@ -3,6 +3,7 @@ import { defineComponent, ref} from 'vue';
 import { useUserStore } from '../../store/user';
 import { Input, Button } from 'ant-design-vue';
 import CheckCode, { createCodeStr } from './check-code';
+import { sendEmailCode } from '../../request/request';
 import './login.scss';
 
 export default defineComponent({
@@ -38,6 +39,9 @@ export default defineComponent({
     function handleToLogin() {
       handleResetCode();
       isRegister.value = false;
+    }
+    function handleRegister() {
+      sendEmailCode({email: "17328422404@163.com" });
     }
 
     function renderFn() {
@@ -103,7 +107,8 @@ export default defineComponent({
                 <div class="opreate-wrap">
                 <Button
                     type="primary"
-                    size="large">注册</Button>
+                    size="large"
+                    onClick={handleRegister}>注册</Button>
                   <Button
                     class="ml10"
                     size="large"

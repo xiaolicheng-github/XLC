@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as sqlite3 from 'sqlite3';
+import { setEmailCode, setEmailCodeParams } from './db';
 
 @Injectable()
 export class DbService {
@@ -46,4 +47,9 @@ export class DbService {
     });
   }
 
+  /* 存储邮件验证码 */
+  setEmailCode(value: setEmailCodeParams) {
+    const parmas = setEmailCode(value);
+    this.dbSql(parmas[0], parmas[1]);
+  }
 }

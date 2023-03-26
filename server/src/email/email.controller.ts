@@ -9,8 +9,7 @@ export class EmailController {
 
   @Post('/sendcode')
   async sendEmailCode(@Body() data) {
-    const res = JSON.parse(data);
-    return this.emailService.sendEmailCode(res);
+    return this.emailService.sendEmailCode(data);
   }
 }
 

@@ -37,9 +37,12 @@ const devConfig = merge(baseConfig({
     static: {
       directory: path.join(__dirname, "../public"), //托管静态资源public文件夹
     }, 
-    proxy: {
-      '/api': 'http://127.0.0.1:4000'
-    }
+    proxy: [
+      {
+        context: ['/api', '/email'],
+        target: 'http://127.0.0.1:3000',
+      },
+    ]
   },
   plugins: [
     new ReactRefreshWebpackPlugin(), // 添加热更新插件
