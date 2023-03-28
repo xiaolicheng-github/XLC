@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 const moment = require('moment');
 import { DbService } from 'src/db/db.service';
 import { randomIntCode } from '../utils/random';
+import { codeStatus } from '../utils/statusCode';
 
 @Injectable()
 export class EmailService {
@@ -10,7 +11,18 @@ export class EmailService {
     private readonly mailerService: MailerService,
     private readonly dbService: DbService) { }
 
+  /* 发送邮箱验证码 */
   async sendEmailCode(data) {
+    // 发送验证码不能太频繁
+    const codesData = await this.getEmailCodes(data.email) as any;
+    const firstTime = codesData?.data?.[0]?.time || 0;
+    if(moment.now() - firstTime < (60 * 1000)) {
+      return {
+        code: codeStatus.BadRequest,
+        data: '',
+        message: '请求过于频繁'
+      };
+    }
     try {
       const code = randomIntCode(6);
       const date = new Date().toString();
@@ -35,11 +47,16 @@ export class EmailService {
           });
         })
         .catch(error => {
-          return { error }
+          return { code: 400, data: error, message: '发送失败' };
         });
       return { code: 200, message: '发送成功' };
     } catch (error) {
-      return { error };
+      return { code: 400, data: error, message: '发送失败' };
     }
+  }
+  /* 根据邮箱地址查询数据 */
+  async getEmailCodes(value: string) {
+    const data = await this.dbService.getEmailCodes(value);
+    return data;
   }
 }

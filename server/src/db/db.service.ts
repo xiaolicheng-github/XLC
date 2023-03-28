@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as sqlite3 from 'sqlite3';
-import { setEmailCode, setEmailCodeParams } from './db';
+import { getEmailCodes, setEmailCode, setEmailCodeParams } from './db';
 
 @Injectable()
 export class DbService {
@@ -47,9 +47,20 @@ export class DbService {
     });
   }
 
+  sqlExecute(parmas: (string | number | (string | number)[])[]) {
+    if(parmas.length === 2) {
+      return this.dbSql(parmas[0] as string, parmas[1] as any);
+    } else {
+      return this.dbSql(parmas[0] as string);
+    }
+  }
+
   /* 存储邮件验证码 */
   setEmailCode(value: setEmailCodeParams) {
-    const parmas = setEmailCode(value);
-    this.dbSql(parmas[0], parmas[1]);
+    this.sqlExecute(setEmailCode(value))
+  }
+  /* 根据邮箱地址查询所有对应列 */
+  getEmailCodes(value: string) {
+    return this.sqlExecute(getEmailCodes(value));
   }
 }

@@ -1,5 +1,5 @@
 
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Query } from '@nestjs/common';
 import { EmailService } from './email.service';
 
 @Controller('email')
@@ -9,7 +9,11 @@ export class EmailController {
 
   @Post('/sendcode')
   async sendEmailCode(@Body() data) {
-    return this.emailService.sendEmailCode(data);
+    return await this.emailService.sendEmailCode(data);
+  }
+  @Get('/getcodes')
+  async getEmailCodes(@Query() query: { email: string }) {
+    return await this.emailService.getEmailCodes(query.email);
   }
 }
 

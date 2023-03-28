@@ -1,7 +1,7 @@
 import { Modal } from 'ant-design-vue';
 import { defineComponent, ref} from 'vue';
 import { useUserStore } from '../../store/user';
-import { Input, Button } from 'ant-design-vue';
+import { Input, Button, message } from 'ant-design-vue';
 import CheckCode, { createCodeStr } from './check-code';
 import { sendEmailCode } from '../../request/request';
 import './login.scss';
@@ -14,6 +14,7 @@ export default defineComponent({
     const loginName = ref('');
     const loginPwd = ref('');
     const loginCode = ref('');
+    const loginErrMsg = ref('');
     /* 验证码 */
     const code = ref<string>(createCodeStr());
     /* 是否为注册 */
@@ -23,8 +24,10 @@ export default defineComponent({
     const regPwd = ref('');
     const regBeginPwd = ref('');
     const regCode = ref('');
-    const mailAddr = ref('');
-    const mailAddrCode = ref('');
+    const emailAddr = ref('');
+    const emailAddrCode = ref('');
+    const regErrMsg = ref('');
+    /*  */
 
     function handleCancel() {
       userStore.setShowLogin(false);
@@ -41,7 +44,27 @@ export default defineComponent({
       isRegister.value = false;
     }
     function handleRegister() {
-      sendEmailCode({email: "17328422404@163.com" });
+    }
+
+    async function handleSendEmailCode() {
+      if(!emailAddr.value) {
+        regErrMsg.value = '请输入邮箱地址';
+      } else if(!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(emailAddr.value)) {
+        regErrMsg.value = '请输入正确的邮箱地址';
+      } else if(!regCode.value) {
+        regErrMsg.value = '请输入验证码';
+      } else if(String(regCode.value).toLowerCase() !== String(code.value).toLowerCase()) {
+        regErrMsg.value = '请输入正确的验证码'
+      } else {
+        regErrMsg.value = '';
+        handleResetCode();
+        const isSend = await sendEmailCode({email: emailAddr.value })
+          .then(() => true)
+          .catch(() => false);
+        if(isSend) {
+          message.success('发送成功');
+        }
+      }
     }
 
     function renderFn() {
@@ -80,7 +103,7 @@ export default defineComponent({
                 </div>
                 <div class="login-form-item">
                   <Input
-                    v-model={[mailAddr.value, 'value']}
+                    v-model={[emailAddr.value, 'value']}
                     size="large"
                     addon-before={'邮箱地址'}
                   ></Input>
@@ -95,17 +118,20 @@ export default defineComponent({
                   <CheckCode
                     code={code.value}
                     onResetCode={handleResetCode}></CheckCode>
-                  <Button class="ml10">发送邮箱验证码</Button>
+                  <Button
+                    class="ml10"
+                    onClick={handleSendEmailCode}>发送邮箱验证码</Button>
                 </div>
                 <div class="login-form-item">
                   <Input
-                    v-model={[mailAddrCode.value, 'value']}
+                    v-model={[emailAddrCode.value, 'value']}
                     size="large"
                     addon-before={'邮箱验证码'}
                   ></Input>
                 </div>
+                <div class="err-msg">{regErrMsg.value}</div>
                 <div class="opreate-wrap">
-                <Button
+                  <Button
                     type="primary"
                     size="large"
                     onClick={handleRegister}>注册</Button>
@@ -142,6 +168,7 @@ export default defineComponent({
                   code={code.value}
                   onResetCode={handleResetCode}></CheckCode>
               </div>
+              <div class="err-msg">{loginErrMsg.value}</div>
               <div class="opreate-wrap">
                 <Button
                   type="primary"
@@ -160,7 +187,8 @@ export default defineComponent({
     }
     return {
       renderFn,
-      userStore
+      userStore,
+      emailAddr
     }
   },
   render() {

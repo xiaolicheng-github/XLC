@@ -11,7 +11,7 @@ import { DbModule } from '../db/db.module';
     imports: [
         MailerModule.forRoot({
             ...sendMailConfig,
-            preview: true,// 是否开启预览，开启了这个属性，在调试模式下会自动打开一个网页，预览邮件
+            preview: false,// 是否开启预览，开启了这个属性，在调试模式下会自动打开一个网页，预览邮件
             template: {
                 dir: path.join(process.cwd(), './src/email/template'),//这里就是你的ejs模板文件夹路径
                 adapter: new EjsAdapter(),
