@@ -3,11 +3,11 @@ import baseConfig from './webpack-vue.base';
 const { merge } = require('webpack-merge');
 const CompressionPlugin  = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+// const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const globAll = require('glob-all');
+// const globAll = require('glob-all');
 const distPath = './dist/blog';
 const staticPath = '../blog/static';
 const prodConfig = merge(baseConfig({
@@ -53,17 +53,17 @@ const prodConfig = merge(baseConfig({
       filename: `${staticPath}/css/[name].[contenthash:8].css` // 抽离css的输出目录和名称
     }),
     // 清理无用css
-    new PurgeCSSPlugin({
-      // 检测src下所有tsx文件和public下index.html中使用的类名和id和标签名称
-      // 只打包这些文件中用到的样式
-      paths: globAll.sync([
-        `${path.join(__dirname, '../xlc_blog/src')}/**/*.tsx`,
-        path.join(__dirname, '../xlc_blog/public/index.html')
-      ]),
-      // safelist: {
-      //   standard: [/^ant-/], // 过滤以ant-开头的类名，哪怕没用到也不删除
-      // }
-    }),
+    // new PurgeCSSPlugin({
+    //   // 检测src下所有tsx文件和public下index.html中使用的类名和id和标签名称
+    //   // 只打包这些文件中用到的样式
+    //   paths: globAll.sync([
+    //     `${path.join(__dirname, '../xlc_blog/src')}/**/*.tsx`,
+    //     path.join(__dirname, '../xlc_blog/public/index.html')
+    //   ]),
+    //   safelist: {
+    //     standard: [/^ant-/], // 过滤以ant-开头的类名，哪怕没用到也不删除
+    //   }
+    // }),
     new CompressionPlugin({
       test: /.(js|css)$/, // 只生成css,js压缩文件
       filename: '[path][base].gz', // 文件命名
