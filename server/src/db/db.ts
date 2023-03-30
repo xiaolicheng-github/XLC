@@ -9,6 +9,7 @@ export interface CreateUserParams {
   name: string;
   password: string;
   create_time: number;
+  email_code: number;
 }
 /* 存储邮箱验证码 */
 export function setEmailCode(value: setEmailCodeParams): dataParams {
@@ -33,7 +34,7 @@ export function getUsersFromEmail(value: string) {
 /* 创建用户 */
 export function createUser(value: CreateUserParams) {
   return [
-    `INSERT INTO USER (email, name, password, create_time) VALUES (?,?,?,?)`,
-    [value.email, value.name, value.password, value.create_time]
+    `INSERT INTO USER (email, name, password, create_time, email_code) VALUES (?,?,?,?,?)`,
+    [value.email, value.name, value.password, value.create_time, value.email_code]
   ]
 }
